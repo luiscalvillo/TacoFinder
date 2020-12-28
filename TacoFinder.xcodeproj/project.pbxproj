@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		A8564B612599CD700045E885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B602599CD700045E885 /* AppDelegate.swift */; };
 		A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B622599CD700045E885 /* SceneDelegate.swift */; };
-		A8564B652599CD700045E885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B642599CD700045E885 /* ViewController.swift */; };
 		A8564B682599CD700045E885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B662599CD700045E885 /* Main.storyboard */; };
 		A8564B6A2599CD7D0045E885 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8564B692599CD7D0045E885 /* Assets.xcassets */; };
 		A8564B6D2599CD7D0045E885 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B6B2599CD7D0045E885 /* LaunchScreen.storyboard */; };
+		A8564B782599CF370045E885 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B772599CF370045E885 /* HomeViewController.swift */; };
+		A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A8564B5D2599CD700045E885 /* TacoFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8564B602599CD700045E885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8564B622599CD700045E885 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A8564B642599CD700045E885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A8564B672599CD700045E885 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8564B692599CD7D0045E885 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8564B6C2599CD7D0045E885 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8564B6E2599CD7D0045E885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8564B772599CF370045E885 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TacoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		A8564B5F2599CD700045E885 /* TacoFinder */ = {
 			isa = PBXGroup;
 			children = (
+				A8564B762599CEAD0045E885 /* Controller */,
+				A8564B752599CEA40045E885 /* View */,
+				A8564B742599CE980045E885 /* Model */,
 				A8564B602599CD700045E885 /* AppDelegate.swift */,
 				A8564B622599CD700045E885 /* SceneDelegate.swift */,
-				A8564B642599CD700045E885 /* ViewController.swift */,
 				A8564B662599CD700045E885 /* Main.storyboard */,
 				A8564B692599CD7D0045E885 /* Assets.xcassets */,
 				A8564B6B2599CD7D0045E885 /* LaunchScreen.storyboard */,
 				A8564B6E2599CD7D0045E885 /* Info.plist */,
 			);
 			path = TacoFinder;
+			sourceTree = "<group>";
+		};
+		A8564B742599CE980045E885 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A8564B752599CEA40045E885 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A8564B762599CEAD0045E885 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A8564B772599CF370045E885 /* HomeViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +165,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8564B652599CD700045E885 /* ViewController.swift in Sources */,
 				A8564B612599CD700045E885 /* AppDelegate.swift in Sources */,
 				A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */,
+				A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */,
+				A8564B782599CF370045E885 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
