@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66A2C457EF1E23C93DA209AD /* Pods_TacoFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD8339C0AC2272EA836B1F2 /* Pods_TacoFinder.framework */; };
 		A8564B612599CD700045E885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B602599CD700045E885 /* AppDelegate.swift */; };
 		A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B622599CD700045E885 /* SceneDelegate.swift */; };
 		A8564B682599CD700045E885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B662599CD700045E885 /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03EA99C5B9F1B342AD7E2DB3 /* Pods-TacoFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFinder.release.xcconfig"; path = "Target Support Files/Pods-TacoFinder/Pods-TacoFinder.release.xcconfig"; sourceTree = "<group>"; };
+		4BD8339C0AC2272EA836B1F2 /* Pods_TacoFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TacoFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8564B5D2599CD700045E885 /* TacoFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8564B602599CD700045E885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8564B622599CD700045E885 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		A8564B772599CF370045E885 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TacoTableViewCell.swift; sourceTree = "<group>"; };
 		A8EBF582259B38AB0078698F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D8C53E7F26F7E2576DD06292 /* Pods-TacoFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFinder.debug.xcconfig"; path = "Target Support Files/Pods-TacoFinder/Pods-TacoFinder.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +39,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66A2C457EF1E23C93DA209AD /* Pods_TacoFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D960B853A404305566E0104 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8C53E7F26F7E2576DD06292 /* Pods-TacoFinder.debug.xcconfig */,
+				03EA99C5B9F1B342AD7E2DB3 /* Pods-TacoFinder.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		485B9CE9717A83AAA1C81326 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4BD8339C0AC2272EA836B1F2 /* Pods_TacoFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A8564B542599CD6F0045E885 = {
 			isa = PBXGroup;
 			children = (
 				A8564B5F2599CD700045E885 /* TacoFinder */,
 				A8564B5E2599CD700045E885 /* Products */,
+				2D960B853A404305566E0104 /* Pods */,
+				485B9CE9717A83AAA1C81326 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,9 +129,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8564B712599CD7D0045E885 /* Build configuration list for PBXNativeTarget "TacoFinder" */;
 			buildPhases = (
+				06053D60CCD5F9DB114FD7B0 /* [CP] Check Pods Manifest.lock */,
 				A8564B592599CD700045E885 /* Sources */,
 				A8564B5A2599CD700045E885 /* Frameworks */,
 				A8564B5B2599CD700045E885 /* Resources */,
+				F91119C268E7509428E448D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,6 +189,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06053D60CCD5F9DB114FD7B0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TacoFinder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F91119C268E7509428E448D5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TacoFinder/Pods-TacoFinder-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TacoFinder/Pods-TacoFinder-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TacoFinder/Pods-TacoFinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8564B592599CD700045E885 /* Sources */ = {
@@ -314,6 +383,7 @@
 		};
 		A8564B722599CD7D0045E885 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8C53E7F26F7E2576DD06292 /* Pods-TacoFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -332,6 +402,7 @@
 		};
 		A8564B732599CD7D0045E885 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03EA99C5B9F1B342AD7E2DB3 /* Pods-TacoFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
