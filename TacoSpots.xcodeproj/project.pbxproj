@@ -44,7 +44,7 @@
 		A8564B542599CD6F0045E885 = {
 			isa = PBXGroup;
 			children = (
-				A8564B5F2599CD700045E885 /* TacoFinder */,
+				A8564B5F2599CD700045E885 /* TacoSpots */,
 				A8564B5E2599CD700045E885 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,7 +57,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A8564B5F2599CD700045E885 /* TacoFinder */ = {
+		A8564B5F2599CD700045E885 /* TacoSpots */ = {
 			isa = PBXGroup;
 			children = (
 				A8564B762599CEAD0045E885 /* Controller */,
@@ -70,7 +70,7 @@
 				A8564B6B2599CD7D0045E885 /* LaunchScreen.storyboard */,
 				A8564B6E2599CD7D0045E885 /* Info.plist */,
 			);
-			path = TacoFinder;
+			path = TacoSpots;
 			sourceTree = "<group>";
 		};
 		A8564B742599CE980045E885 /* Model */ = {
@@ -315,10 +315,9 @@
 		A8564B722599CD7D0045E885 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;
-				INFOPLIST_FILE = TacoFinder/Info.plist;
+				INFOPLIST_FILE = TacoSpots/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,10 +332,9 @@
 		A8564B732599CD7D0045E885 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;
-				INFOPLIST_FILE = TacoFinder/Info.plist;
+				INFOPLIST_FILE = TacoSpots/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
