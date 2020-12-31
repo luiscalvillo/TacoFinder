@@ -14,7 +14,6 @@
 		A8564B6D2599CD7D0045E885 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B6B2599CD7D0045E885 /* LaunchScreen.storyboard */; };
 		A8564B782599CF370045E885 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B772599CF370045E885 /* HomeViewController.swift */; };
 		A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */; };
-		A8EBF583259B38AB0078698F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBF582259B38AB0078698F /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		A8564B6E2599CD7D0045E885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8564B772599CF370045E885 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TacoTableViewCell.swift; sourceTree = "<group>"; };
-		A8EBF582259B38AB0078698F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				A8564B772599CF370045E885 /* HomeViewController.swift */,
-				A8EBF582259B38AB0078698F /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,7 +168,6 @@
 				A8564B612599CD700045E885 /* AppDelegate.swift in Sources */,
 				A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */,
 				A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */,
-				A8EBF583259B38AB0078698F /* MapViewController.swift in Sources */,
 				A8564B782599CF370045E885 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

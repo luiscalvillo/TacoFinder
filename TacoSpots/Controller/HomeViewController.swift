@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  TacoFinder
+//  TacoSpots
 //
 //  Created by Luis Calvillo on 12/28/20.
 //  Copyright © 2020 Luis Calvillo. All rights reserved.
@@ -8,23 +8,38 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class HomeViewController: UIViewController {
    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     let tableViewData = Array(repeating: "Item", count: 5)
     
+    
+    
+    var locationManager: CLLocationManager?
+    
+    
+    // MARK - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        locationManager = CLLocationManager()
+        mapView.delegate = self
+        locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.startUpdatingLocation()
+        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +49,8 @@ class HomeViewController: UIViewController {
         }
     }
 
+    
+ // MARK: - IBActions
 
 
     @IBAction func segmentedControlIndexValueWasChanged(_ sender: Any) {
@@ -54,6 +71,8 @@ class HomeViewController: UIViewController {
             break
         }
     }
+    
+
     
 }
 
@@ -76,3 +95,20 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
          return 132
      }
 }
+
+extension HomeViewController: MKMapViewDelegate {
+    
+    
+    
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.mapView.setRegion(region, animated: true)
+        }
+    }
+}
+

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  TacoFinder
+//  TacoSpots
 //
 //  Created by Luis Calvillo on 12/28/20.
 //  Copyright © 2020 Luis Calvillo. All rights reserved.
