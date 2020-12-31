@@ -16,6 +16,7 @@
 		A8564B6D2599CD7D0045E885 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B6B2599CD7D0045E885 /* LaunchScreen.storyboard */; };
 		A8564B782599CF370045E885 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B772599CF370045E885 /* HomeViewController.swift */; };
 		A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */; };
+		E93868E885A2307EBE033D0A /* Pods_TacoSpots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2576C2C59CAA960520711AE /* Pods_TacoSpots.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,9 @@
 		A8564B6E2599CD7D0045E885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8564B772599CF370045E885 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A8564B7B2599D1C00045E885 /* TacoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TacoTableViewCell.swift; sourceTree = "<group>"; };
+		D23167B2537FF3FD79513981 /* Pods-TacoSpots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoSpots.release.xcconfig"; path = "Target Support Files/Pods-TacoSpots/Pods-TacoSpots.release.xcconfig"; sourceTree = "<group>"; };
+		D2576C2C59CAA960520711AE /* Pods_TacoSpots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TacoSpots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43E009A2E84A591425B45C7 /* Pods-TacoSpots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoSpots.debug.xcconfig"; path = "Target Support Files/Pods-TacoSpots/Pods-TacoSpots.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +41,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93868E885A2307EBE033D0A /* Pods_TacoSpots.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13A8BDF7CBCC3C9720DB1CF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2576C2C59CAA960520711AE /* Pods_TacoSpots.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		36585E2B2D3077D9BE905977 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E43E009A2E84A591425B45C7 /* Pods-TacoSpots.debug.xcconfig */,
+				D23167B2537FF3FD79513981 /* Pods-TacoSpots.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A8564B542599CD6F0045E885 = {
 			isa = PBXGroup;
 			children = (
 				A8564B5F2599CD700045E885 /* TacoSpots */,
 				A8564B5E2599CD700045E885 /* Products */,
+				36585E2B2D3077D9BE905977 /* Pods */,
+				13A8BDF7CBCC3C9720DB1CF1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8564B712599CD7D0045E885 /* Build configuration list for PBXNativeTarget "TacoSpots" */;
 			buildPhases = (
+				028D13A1D78F658DE4B9E2F2 /* [CP] Check Pods Manifest.lock */,
 				A8564B592599CD700045E885 /* Sources */,
 				A8564B5A2599CD700045E885 /* Frameworks */,
 				A8564B5B2599CD700045E885 /* Resources */,
+				B812C330C4C909E472CEA1EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,6 +192,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		028D13A1D78F658DE4B9E2F2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TacoSpots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B812C330C4C909E472CEA1EB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TacoSpots/Pods-TacoSpots-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TacoSpots/Pods-TacoSpots-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TacoSpots/Pods-TacoSpots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8564B592599CD700045E885 /* Sources */ = {
@@ -318,6 +387,7 @@
 		};
 		A8564B722599CD7D0045E885 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E43E009A2E84A591425B45C7 /* Pods-TacoSpots.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;
@@ -335,6 +405,7 @@
 		};
 		A8564B732599CD7D0045E885 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D23167B2537FF3FD79513981 /* Pods-TacoSpots.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;

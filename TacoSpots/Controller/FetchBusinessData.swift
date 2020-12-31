@@ -46,6 +46,7 @@ extension HomeViewController {
                     place.name = business.value(forKey: "name") as? String
                     place.id = business.value(forKey: "id") as? String
                     place.distance = business.value(forKey: "distance") as? Double
+                    place.imageURL = business.value(forKey: "image_url") as? String
                     let address = business.value(forKeyPath: "location.display_address") as? [String]
                     place.address = address?.joined(separator: "\n")
                     
@@ -57,7 +58,5 @@ extension HomeViewController {
             print("Caught error")
             completionHandler(nil, error)
             }}.resume()
-        
     }
-    
 }

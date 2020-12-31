@@ -10,8 +10,11 @@ import UIKit
 
 class TacoTableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var businessImageView: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

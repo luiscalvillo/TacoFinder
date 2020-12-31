@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import SDWebImage
 
 class HomeViewController: UIViewController {
    
@@ -17,10 +18,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    let tableViewData = Array(repeating: "Item", count: 5)
     
     let CPLatitude: Double = 40.782483
     let CPLongitude: Double = -73.963540
+    
+    var latitude = 0.0
+    var longitude = 0.0
     
     
     
@@ -44,7 +47,7 @@ class HomeViewController: UIViewController {
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
         
-        retrieveBusinesses(latitude: CPLatitude, longitude: CPLongitude, category: "tacos", limit: 5, sortBy: "distance", locale: "en_US") { (response, error) in
+        retrieveBusinesses(latitude: latitude, longitude: longitude, category: "tacos", limit: 5, sortBy: "distance", locale: "en_US") { (response, error) in
             if let response = response {
                 self.businesses = response
                 DispatchQueue.main.async {
@@ -102,6 +105,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TacoTableViewCell
         cell.restaurantNameLabel.text = businesses[indexPath.row].name
         cell.addressLabel.text = businesses[indexPath.row].address
+        cell.distanceLabel.text = "\(businesses[indexPath.row].distance)"
+        
+        let businessImageUrl = businesses[indexPath.row].imageURL
+        let imageView: UIImageView = cell.businessImageView
+    
+        imageView.sd_setImage(with: URL(string: businessImageUrl!), placeholderImage: nil)
+        
+        
         return cell
      }
      
@@ -122,6 +133,9 @@ extension HomeViewController: CLLocationManagerDelegate {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             self.mapView.setRegion(region, animated: true)
+            
+            latitude = location.coordinate.latitude
+            longitude = location.coordinate.longitude
         }
     }
 }
