@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A848B15E259DA66D007CF631 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = A848B15C259DA653007CF631 /* Business.swift */; };
+		A848B160259DA739007CF631 /* FetchBusinessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A848B15F259DA739007CF631 /* FetchBusinessData.swift */; };
 		A8564B612599CD700045E885 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B602599CD700045E885 /* AppDelegate.swift */; };
 		A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8564B622599CD700045E885 /* SceneDelegate.swift */; };
 		A8564B682599CD700045E885 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8564B662599CD700045E885 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A848B15C259DA653007CF631 /* Business.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Business.swift; path = ../../../../../../../Documents/Business.swift; sourceTree = "<group>"; };
+		A848B15F259DA739007CF631 /* FetchBusinessData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusinessData.swift; sourceTree = "<group>"; };
 		A8564B5D2599CD700045E885 /* TacoSpots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoSpots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8564B602599CD700045E885 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8564B622599CD700045E885 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 		A8564B742599CE980045E885 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A848B15C259DA653007CF631 /* Business.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -90,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				A8564B772599CF370045E885 /* HomeViewController.swift */,
+				A848B15F259DA739007CF631 /* FetchBusinessData.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -165,9 +171,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A848B160259DA739007CF631 /* FetchBusinessData.swift in Sources */,
 				A8564B612599CD700045E885 /* AppDelegate.swift in Sources */,
 				A8564B632599CD700045E885 /* SceneDelegate.swift in Sources */,
 				A8564B7C2599D1C00045E885 /* TacoTableViewCell.swift in Sources */,
+				A848B15E259DA66D007CF631 /* Business.swift in Sources */,
 				A8564B782599CF370045E885 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

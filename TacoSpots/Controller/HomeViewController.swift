@@ -19,9 +19,14 @@ class HomeViewController: UIViewController {
     
     let tableViewData = Array(repeating: "Item", count: 5)
     
+    let CPLatitude: Double = 40.782483
+    let CPLongitude: Double = -73.963540
+    
     
     
     var locationManager: CLLocationManager?
+    
+    var businesses: [Business] = []
     
     
     // MARK - View Lifecycle
@@ -39,6 +44,15 @@ class HomeViewController: UIViewController {
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
         
+        retrieveBusinesses(latitude: CPLatitude, longitude: CPLongitude, category: "tacos", limit: 5, sortBy: "distance", locale: "en_US") { (response, error) in
+            if let response = response {
+                self.businesses = response
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    print("businesses = \(self.businesses.count)")
+                }
+            }
+        }
     
     }
     
@@ -81,14 +95,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return tableViewData.count
+         return businesses.count
     }
         
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TacoTableViewCell
-         cell.restaurantNameLabel.text = "Taco Shop!"
-         cell.addressLabel.text = self.tableViewData[indexPath.row]
-         return cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TacoTableViewCell
+        cell.restaurantNameLabel.text = businesses[indexPath.row].name
+        cell.addressLabel.text = businesses[indexPath.row].address
+        return cell
      }
      
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
