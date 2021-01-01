@@ -31,6 +31,8 @@ class HomeViewController: UIViewController {
     
     var businesses: [Business] = []
     
+
+    
     
     // MARK - View Lifecycle
     
@@ -48,6 +50,7 @@ class HomeViewController: UIViewController {
         locationManager?.startUpdatingLocation()
         
         retrieveBusinesses(latitude: latitude, longitude: longitude, category: "tacos", limit: 5, sortBy: "distance", locale: "en_US") { (response, error) in
+            
             if let response = response {
                 self.businesses = response
                 DispatchQueue.main.async {
@@ -119,7 +122,27 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          return 132
      }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let businessDetailVC = storyboard.instantiateViewController(withIdentifier: "BusinessDetailTableViewController") as! BusinessDetailTableViewController
+        
+        let business = businesses[indexPath.row]
+        
+
+        // FIXME: - remove force unwraps
+        
+        businessDetailVC.name = business.name!
+        businessDetailVC.address = business.address!
+        
+        self.navigationController?.pushViewController(businessDetailVC, animated: true)
+        
+    }
+    
+    
 }
+
+
 
 extension HomeViewController: MKMapViewDelegate {
     

@@ -8,9 +8,13 @@
 
 import Foundation
 
+var businessList: [Business] = []
 extension HomeViewController {
+     
     
     func retrieveBusinesses(latitude: Double, longitude: Double, category: String, limit: Int, sortBy: String, locale: String, completionHandler: @escaping ([Business]?, Error?) -> Void) {
+        
+        
         
         let apiKey = "YOUR_API_KEY"
         let baseURL = "https://api.yelp.com/v3/businesses/search?latitude=\(latitude)&longitude=\(longitude)&categories=\(category)&limit=\(limit)&sort_by=\(sortBy)&locale=\(locale)"
@@ -38,7 +42,7 @@ extension HomeViewController {
                 // Businesses
                 guard let businesses = resp.value(forKey: "businesses") as? [NSDictionary] else { return }
                
-                var businessList: [Business] = []
+//                var businessList: [Business] = []
                
                 // access each business
                 for business in businesses {
