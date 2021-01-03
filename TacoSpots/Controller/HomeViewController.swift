@@ -13,24 +13,18 @@ import SDWebImage
 
 class HomeViewController: UIViewController {
    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    
-    let CPLatitude: Double = 40.782483
-    let CPLongitude: Double = -73.963540
-    
     var latitude = 0.0
     var longitude = 0.0
-    
-    
     
     var locationManager: CLLocationManager?
     
     var businesses: [Business] = []
     
+    var customPointAnnotation: CustomPointAnnotation!
 
     
     
@@ -47,19 +41,9 @@ class HomeViewController: UIViewController {
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.requestWhenInUseAuthorization()
-        locationManager?.startUpdatingLocation()
         
-        retrieveBusinesses(latitude: latitude, longitude: longitude, category: "tacos", limit: 5, sortBy: "distance", locale: "en_US") { (response, error) in
-            
-            if let response = response {
-                self.businesses = response
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    print("businesses = \(self.businesses.count)")
-                }
-            }
-        }
-    
+        locationManager?.startUpdatingLocation()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +51,8 @@ class HomeViewController: UIViewController {
             self.mapView.alpha = 1
             self.tableView.alpha = 0
         }
+        
+        
     }
 
     
@@ -94,6 +80,22 @@ class HomeViewController: UIViewController {
     
 
     
+    func addBusinessesToMap() {
+        
+        for business in businessList {
+            
+            customPointAnnotation = CustomPointAnnotation()
+            customPointAnnotation.title = business.name
+            customPointAnnotation.address = business.address
+
+            if let lat = business.coordinates!["latitude"], let lon = business.coordinates!["longitude"] {
+                customPointAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                mapView.addAnnotation(customPointAnnotation)
+            }
+        }
+
+    }
+
 }
 
 
@@ -106,9 +108,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TacoTableViewCell
-        cell.restaurantNameLabel.text = businesses[indexPath.row].name
-        cell.addressLabel.text = businesses[indexPath.row].address
-        cell.distanceLabel.text = "\(businesses[indexPath.row].distance)"
+        let business = businesses[indexPath.row]
+        
+        cell.restaurantNameLabel.text = business.name
+        cell.addressLabel.text = business.address
+        cell.distanceLabel.text = "\(business.distance)"
         
         let businessImageUrl = businesses[indexPath.row].imageURL
         let imageView: UIImageView = cell.businessImageView
@@ -146,11 +150,54 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension HomeViewController: MKMapViewDelegate {
     
-    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let annotation = annotation as? CustomPointAnnotation else { return nil }
+        
+        let identifier = "Annotation"
+        
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        
+        annotationView.canShowCallout = true
+        
+        annotationView.annotation = annotation
+        
+        annotationView.image = UIImage(named: "placemarkPlaceholder")
+        annotationView.frame.size = CGSize(width: 40, height: 40)
+        
+        return annotationView
+    }
     
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        if status == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+            mapView.userTrackingMode = .follow
+            
+            DispatchQueue.main.async {
+                
+                self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 10, sortBy: "distance", locale: "en_US") { (response, error) in
+
+                         if let response = response {
+                             self.businesses = response
+                             DispatchQueue.main.async {
+                                 self.tableView.reloadData()
+                                 print("businesses = \(self.businesses.count)")
+                                 
+                                self.addBusinessesToMap()
+                             }
+                         }
+                     }
+            }
+            
+        }
+    }
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -163,3 +210,9 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
+class CustomPointAnnotation: MKPointAnnotation {
+    var name: String!
+    var address: String!
+    var coordinates: [String : Double]!
+    
+}

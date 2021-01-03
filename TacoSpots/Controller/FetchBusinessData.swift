@@ -14,8 +14,6 @@ extension HomeViewController {
     
     func retrieveBusinesses(latitude: Double, longitude: Double, category: String, limit: Int, sortBy: String, locale: String, completionHandler: @escaping ([Business]?, Error?) -> Void) {
         
-        
-        
         let apiKey = "YOUR_API_KEY"
         let baseURL = "https://api.yelp.com/v3/businesses/search?latitude=\(latitude)&longitude=\(longitude)&categories=\(category)&limit=\(limit)&sort_by=\(sortBy)&locale=\(locale)"
         let url = URL(string: baseURL)
@@ -52,9 +50,20 @@ extension HomeViewController {
                     place.distance = business.value(forKey: "distance") as? Double
                     place.imageURL = business.value(forKey: "image_url") as? String
                     let address = business.value(forKeyPath: "location.display_address") as? [String]
+
                     place.address = address?.joined(separator: "\n")
                     
+                    let coordinates = business.value(forKey: "coordinates") as? [String : Double]
+                    
+                    place.coordinates = coordinates
+                    
+                    
+                    place.latitude = coordinates!["latitude"] as! Double
+                    place.longitude = coordinates!["longitude"] as! Double
+                   
+
                     businessList.append(place)
+                    print("place lat lat = \(place)")
                 }
                
                 completionHandler(businessList, nil)
