@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     var latitude = 0.0
     var longitude = 0.0
     
+    var currentLocation = [0.0, 0.0]
+    
     var locationManager: CLLocationManager?
     
     var businesses: [Business] = []
@@ -138,6 +140,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         businessDetailVC.name = business.name!
         businessDetailVC.address = business.address!
+        businessDetailVC.distance = business.distance!
+        businessDetailVC.latitude = business.latitude!
+        businessDetailVC.longitude = business.longitude!
         
         self.navigationController?.pushViewController(businessDetailVC, animated: true)
         
@@ -206,6 +211,8 @@ extension HomeViewController: CLLocationManagerDelegate {
             
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
+            
+            currentLocation = [latitude, longitude]
         }
     }
 }
