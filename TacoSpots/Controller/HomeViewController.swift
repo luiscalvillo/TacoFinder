@@ -41,7 +41,10 @@ class HomeViewController: UIViewController {
     
     var customPointAnnotation: CustomPointAnnotation!
     var selectedAnnotation: CustomPointAnnotation?
+    
 
+    var mapViewIsVisible = true
+    var listViewIsVisible = false
     
     
     // MARK - View Lifecycle
@@ -62,19 +65,36 @@ class HomeViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleScreenTap(sender:)))
         self.view.addGestureRecognizer(tap)
+        
+        let popupViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePopupViewScreenTap(sender:)))
+        businessPopupView.addGestureRecognizer(popupViewTapGesture)
+        
+        setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.5) {
-            self.mapView.alpha = 1
-            self.tableView.alpha = 0
+            
+            if self.mapViewIsVisible == true {
+                self.mapView.alpha = 1
+                self.tableView.alpha = 0
+            } else {
+                self.mapView.alpha = 0
+                self.tableView.alpha = 1
+            }
+            
         }
         
+        setupSegmentedControlView()
         setupBusinessPopupView()
     }
     
     @objc func handleScreenTap(sender: UITapGestureRecognizer) {
         hidePopupView()
+    }
+    
+    @objc func handlePopupViewScreenTap(sender: UITapGestureRecognizer) {
+        goToBusinessDetailVC()
     }
     
     func setupBusinessPopupView() {
@@ -83,7 +103,29 @@ class HomeViewController: UIViewController {
         popupViewBottomConstraint.constant = -150
         self.view.layoutIfNeeded()
     }
+    
+    func setupSegmentedControlView() {
+        // selected option color
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
 
+        // color of other options
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        
+        let font: [AnyHashable : Any] = [NSAttributedString.Key.font : UIFont(name: "GillSans", size: 16)]
+        segmentedControl.setTitleTextAttributes(font as! [NSAttributedString.Key : Any], for: .normal)
+    }
+
+    
+    func setupNavigationBar() {
+        
+        let logo = UIImage(named: "tacospots-logo")
+    
+        let imageView = UIImageView(image: logo)
+        imageView.contentMode = .scaleAspectFit
+        
+        self.navigationItem.titleView = imageView
+    }
+    
     
  // MARK: - IBActions
     
@@ -95,11 +137,17 @@ class HomeViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.mapView.alpha = 1
                 self.tableView.alpha = 0
+                
+                self.mapViewIsVisible = true
+                self.listViewIsVisible = false
             }
         case 1:
             UIView.animate(withDuration: 0.5) {
                 self.mapView.alpha = 0
                 self.tableView.alpha = 1
+                
+                self.mapViewIsVisible = false
+                self.listViewIsVisible = true
             }
         default:
             break
@@ -114,6 +162,9 @@ class HomeViewController: UIViewController {
             customPointAnnotation.title = business.name
             customPointAnnotation.address = business.address
             customPointAnnotation.imageUrl = business.imageURL
+            customPointAnnotation.latitude = business.latitude
+            customPointAnnotation.longitude = business.longitude
+            customPointAnnotation.distance = business.distance
         
             if let lat = business.coordinates!["latitude"], let lon = business.coordinates!["longitude"] {
                 customPointAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -141,8 +192,6 @@ class HomeViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
-    
-
 
 }
 
@@ -160,7 +209,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.restaurantNameLabel.text = business.name
         cell.addressLabel.text = business.address
-        cell.distanceLabel.text = "\(business.distance)"
+        cell.distanceLabel.text = "\(String(describing: business.distance?.getMiles())) mi"
         
         let businessImageUrl = businesses[indexPath.row].imageURL
         let imageView: UIImageView = cell.businessImageView
@@ -171,7 +220,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
      }
      
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 164
+         return 148
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -187,6 +236,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         businessDetailVC.distance = business.distance!
         businessDetailVC.latitude = business.latitude!
         businessDetailVC.longitude = business.longitude!
+        businessDetailVC.imageUrl = business.imageURL!
         
         self.navigationController?.pushViewController(businessDetailVC, animated: true)
         
@@ -229,19 +279,33 @@ extension HomeViewController: MKMapViewDelegate {
             
             if view .isKind(of: MKUserLocation.self) {
                  businessNameLabel.text = "My Location"
-             } else {
+            } else {
                  
-                 businessNameLabel.text = selectedAnnotation?.title
-                 businessAddressLabel.text = selectedAnnotation?.address
-                 
-                 let businessImageUrl = selectedAnnotation?.imageUrl ?? ""
-                 let imageView: UIImageView = self.businessImageView
-                 imageView.sd_setImage(with: URL(string: businessImageUrl), placeholderImage: nil)
-                 print("iamge url picked = \(businessImageUrl)")
-             }
+                businessNameLabel.text = selectedAnnotation?.title
+                businessAddressLabel.text = selectedAnnotation?.address
+                businessDistanceLabel.text = "\(selectedAnnotation?.distance.getMiles())"
+ 
+                let businessImageUrl = selectedAnnotation?.imageUrl ?? ""
+                let imageView: UIImageView = self.businessImageView
+                imageView.sd_setImage(with: URL(string: businessImageUrl), placeholderImage: nil)
+            }
         } else {
             hidePopupView()
         }
+    }
+    
+    func goToBusinessDetailVC() {
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let businessVC = storyboard.instantiateViewController(identifier: "BusinessDetailTableViewController") as! BusinessDetailTableViewController
+        
+        businessVC.name = selectedAnnotation!.title!
+        businessVC.address = selectedAnnotation!.address
+        businessVC.imageUrl = selectedAnnotation!.imageUrl
+        businessVC.latitude = selectedAnnotation!.latitude
+        businessVC.longitude = selectedAnnotation!.longitude
+        
+        self.navigationController?.pushViewController(businessVC, animated: true)
     }
     
 }
@@ -256,7 +320,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             
             DispatchQueue.main.async {
                 
-                self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 10, sortBy: "distance", locale: "en_US") { (response, error) in
+                self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 20, sortBy: "distance", locale: "en_US") { (response, error) in
 
                          if let response = response {
                              self.businesses = response
@@ -293,4 +357,13 @@ class CustomPointAnnotation: MKPointAnnotation {
     var address: String!
     var coordinates: [String : Double]!
     var imageUrl: String!
+    var latitude: Double!
+    var longitude: Double!
+    var distance: Double!
+}
+
+extension Double {
+    func getMiles() -> Double {
+        return self * 0.000621371191
+    }
 }

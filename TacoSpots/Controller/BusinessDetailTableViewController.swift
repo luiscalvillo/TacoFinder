@@ -11,6 +11,7 @@ import MapKit
 
 class BusinessDetailTableViewController: UITableViewController {
     
+    @IBOutlet weak var businessImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -22,21 +23,30 @@ class BusinessDetailTableViewController: UITableViewController {
     var distance = 0.0
     var latitude = 0.0
     var longitude = 0.0
+    var imageUrl = ""
     
     var currentLocation = [0.0, 0.0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        showMapLocationFromCoordinates()
+    }
+    
+    func setupView() {
         nameLabel.text = name
         addressLabel.text = address
-        distanceLabel.text = "\(distance)"
+        distanceLabel.text = "\(distance.getMiles()) mi"
+        
+        let businessImageUrl = imageUrl
+        let imageView: UIImageView = businessImageView
+                 
+        imageView.sd_setImage(with: URL(string: businessImageUrl), placeholderImage: nil)
         
         mapView.layer.cornerRadius = 20
-        
         directionsButton.layer.cornerRadius = 20
-    
-        showMapLocationFromCoordinates()
+        
     }
     
     
@@ -104,26 +114,40 @@ class BusinessDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let imageHeight = businessImageView.frame.width
+        
         if indexPath.section == 0 {
             
             if indexPath.row == 0 {
-                return 375
+                return imageHeight
             } else if indexPath.row == 1 {
                 return 100
             } else if indexPath.row == 2 {
-                
                 return 152
-                
             } else if indexPath.row == 3 {
-                
                 return 120
-                
             }
         }
         
         return 100
     }
+}
 
- 
 
+extension BusinessDetailTableViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let annotation = annotation as? MKAnnotation else { return nil }
+        
+        let identifier = "Annotation"
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) ?? MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        
+        annotationView.canShowCallout = false
+        annotationView.annotation = annotation
+        annotationView.image = UIImage(named: "placemarkPlaceholder")
+        
+        return annotationView
+    }
 }
