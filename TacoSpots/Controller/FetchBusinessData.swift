@@ -57,7 +57,6 @@ extension HomeViewController {
                     
                     place.coordinates = coordinates
                     
-                    
                     place.latitude = coordinates!["latitude"] as! Double
                     place.longitude = coordinates!["longitude"] as! Double
                    

@@ -17,6 +17,19 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    // Popup view
+    @IBOutlet weak var businessImageView: UIImageView!
+    @IBOutlet weak var businessNameLabel: UILabel!
+    @IBOutlet weak var businessAddressLabel: UILabel!
+    @IBOutlet weak var businessDistanceLabel: UILabel!
+    
+    @IBOutlet weak var businessPopupView: UIView!
+    
+    @IBOutlet weak var popupViewBottomConstraint: NSLayoutConstraint!
+    
+    var isPopupViewVisible = false
+    
+    
     var latitude = 0.0
     var longitude = 0.0
     
@@ -27,6 +40,7 @@ class HomeViewController: UIViewController {
     var businesses: [Business] = []
     
     var customPointAnnotation: CustomPointAnnotation!
+    var selectedAnnotation: CustomPointAnnotation?
 
     
     
@@ -45,7 +59,9 @@ class HomeViewController: UIViewController {
         locationManager?.requestWhenInUseAuthorization()
         
         locationManager?.startUpdatingLocation()
-
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleScreenTap(sender:)))
+        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,13 +70,23 @@ class HomeViewController: UIViewController {
             self.tableView.alpha = 0
         }
         
+        setupBusinessPopupView()
+    }
+    
+    @objc func handleScreenTap(sender: UITapGestureRecognizer) {
+        hidePopupView()
+    }
+    
+    func setupBusinessPopupView() {
         
+        isPopupViewVisible = false
+        popupViewBottomConstraint.constant = -150
+        self.view.layoutIfNeeded()
     }
 
     
  // MARK: - IBActions
-
-
+    
     @IBAction func segmentedControlIndexValueWasChanged(_ sender: Any) {
         
         switch segmentedControl.selectedSegmentIndex {
@@ -80,8 +106,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-
-    
     func addBusinessesToMap() {
         
         for business in businessList {
@@ -89,14 +113,36 @@ class HomeViewController: UIViewController {
             customPointAnnotation = CustomPointAnnotation()
             customPointAnnotation.title = business.name
             customPointAnnotation.address = business.address
-
+            customPointAnnotation.imageUrl = business.imageURL
+        
             if let lat = business.coordinates!["latitude"], let lon = business.coordinates!["longitude"] {
                 customPointAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                 mapView.addAnnotation(customPointAnnotation)
             }
         }
-
     }
+    
+    
+    func showPopupView() {
+        
+        isPopupViewVisible = true
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 2.0, options: .curveEaseIn, animations: {
+            self.popupViewBottomConstraint.constant = 0
+        }, completion: nil)
+    }
+    
+    func hidePopupView() {
+        
+        isPopupViewVisible = false
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 2.0, options: .curveEaseIn, animations: {
+            self.popupViewBottomConstraint.constant = -150
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+
 
 }
 
@@ -121,12 +167,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
         imageView.sd_setImage(with: URL(string: businessImageUrl!), placeholderImage: nil)
         
-        
         return cell
      }
      
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 132
+         return 164
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -135,7 +180,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         let business = businesses[indexPath.row]
         
-
         // FIXME: - remove force unwraps
         
         businessDetailVC.name = business.name!
@@ -171,6 +215,33 @@ extension HomeViewController: MKMapViewDelegate {
         annotationView.frame.size = CGSize(width: 40, height: 40)
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard let annotation = view.annotation as? CustomPointAnnotation else { return }
+        
+        self.selectedAnnotation = annotation
+        
+        if isPopupViewVisible == false {
+            
+            showPopupView()
+            
+            if view .isKind(of: MKUserLocation.self) {
+                 businessNameLabel.text = "My Location"
+             } else {
+                 
+                 businessNameLabel.text = selectedAnnotation?.title
+                 businessAddressLabel.text = selectedAnnotation?.address
+                 
+                 let businessImageUrl = selectedAnnotation?.imageUrl ?? ""
+                 let imageView: UIImageView = self.businessImageView
+                 imageView.sd_setImage(with: URL(string: businessImageUrl), placeholderImage: nil)
+                 print("iamge url picked = \(businessImageUrl)")
+             }
+        } else {
+            hidePopupView()
+        }
     }
     
 }
@@ -221,5 +292,5 @@ class CustomPointAnnotation: MKPointAnnotation {
     var name: String!
     var address: String!
     var coordinates: [String : Double]!
-    
+    var imageUrl: String!
 }

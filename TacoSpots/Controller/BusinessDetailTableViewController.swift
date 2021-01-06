@@ -14,10 +14,9 @@ class BusinessDetailTableViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var directionsButton: UIButton!
+    
     var name = ""
     var address = ""
     var distance = 0.0
@@ -38,8 +37,8 @@ class BusinessDetailTableViewController: UITableViewController {
         directionsButton.layer.cornerRadius = 20
     
         showMapLocationFromCoordinates()
-     
     }
+    
     
     // MARK - IBActions
     
@@ -117,7 +116,7 @@ class BusinessDetailTableViewController: UITableViewController {
                 
             } else if indexPath.row == 3 {
                 
-                return 92
+                return 120
                 
             }
         }
