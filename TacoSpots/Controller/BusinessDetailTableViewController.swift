@@ -32,12 +32,17 @@ class BusinessDetailTableViewController: UITableViewController {
         
         setupView()
         showMapLocationFromCoordinates()
+        mapView.delegate = self
     }
     
     func setupView() {
         nameLabel.text = name
         addressLabel.text = address
-        distanceLabel.text = "\(distance.getMiles()) mi"
+
+        let businessDistanceInMiles = distance.getMiles()
+        let roundedDistanceInMiles = String(format: "%.2f", ceil(businessDistanceInMiles * 100) / 100)
+        
+        distanceLabel.text = roundedDistanceInMiles + " mi"
         
         let businessImageUrl = imageUrl
         let imageView: UIImageView = businessImageView
@@ -147,6 +152,7 @@ extension BusinessDetailTableViewController: MKMapViewDelegate {
         annotationView.canShowCallout = false
         annotationView.annotation = annotation
         annotationView.image = UIImage(named: "placemarkPlaceholder")
+        annotationView.frame.size = CGSize(width: 40, height: 40)
         
         return annotationView
     }

@@ -210,6 +210,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.restaurantNameLabel.text = business.name
         cell.addressLabel.text = business.address
         cell.distanceLabel.text = "\(String(describing: business.distance?.getMiles())) mi"
+
+        let businessDistanceInMiles = business.distance!.getMiles()
+        let roundedDistanceInMiles = String(format: "%.2f", ceil(businessDistanceInMiles * 100) / 100)
+        
+        cell.distanceLabel.text = roundedDistanceInMiles + " mi"
         
         let businessImageUrl = businesses[indexPath.row].imageURL
         let imageView: UIImageView = cell.businessImageView
@@ -239,7 +244,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         businessDetailVC.imageUrl = business.imageURL!
         
         self.navigationController?.pushViewController(businessDetailVC, animated: true)
-        
     }
     
     
@@ -283,7 +287,11 @@ extension HomeViewController: MKMapViewDelegate {
                  
                 businessNameLabel.text = selectedAnnotation?.title
                 businessAddressLabel.text = selectedAnnotation?.address
-                businessDistanceLabel.text = "\(selectedAnnotation?.distance.getMiles())"
+               
+                let businessDistanceInMiles = selectedAnnotation?.distance.getMiles()
+                let roundedDistanceInMiles = String(format: "%.2f", ceil(businessDistanceInMiles! * 100) / 100)
+                
+                businessDistanceLabel.text = roundedDistanceInMiles + " mi"
  
                 let businessImageUrl = selectedAnnotation?.imageUrl ?? ""
                 let imageView: UIImageView = self.businessImageView
@@ -304,6 +312,7 @@ extension HomeViewController: MKMapViewDelegate {
         businessVC.imageUrl = selectedAnnotation!.imageUrl
         businessVC.latitude = selectedAnnotation!.latitude
         businessVC.longitude = selectedAnnotation!.longitude
+        businessVC.distance = selectedAnnotation!.distance
         
         self.navigationController?.pushViewController(businessVC, animated: true)
     }
@@ -322,16 +331,14 @@ extension HomeViewController: CLLocationManagerDelegate {
                 
                 self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 20, sortBy: "distance", locale: "en_US") { (response, error) in
 
-                         if let response = response {
-                             self.businesses = response
-                             DispatchQueue.main.async {
-                                 self.tableView.reloadData()
-                                 print("businesses = \(self.businesses.count)")
-                                 
-                                self.addBusinessesToMap()
-                             }
-                         }
-                     }
+                    if let response = response {
+                        self.businesses = response
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            self.addBusinessesToMap()
+                        }
+                    }
+                }
             }
             
         }
