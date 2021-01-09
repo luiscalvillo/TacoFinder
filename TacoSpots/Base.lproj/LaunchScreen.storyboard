@@ -15,15 +15,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tacospots-splash-bg" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-0a-p78">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tacospots-logo-splash-bg" translatesAutoresizingMaskIntoConstraints="NO" id="ndl-0a-p78">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ndl-0a-p78" secondAttribute="bottom" id="62U-7U-he5"/>
-                            <constraint firstItem="ndl-0a-p78" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="R5o-0K-hPh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ndl-0a-p78" secondAttribute="trailing" id="pOv-MW-J3v"/>
+                            <constraint firstItem="ndl-0a-p78" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9qi-fu-Cin"/>
+                            <constraint firstAttribute="trailing" secondItem="ndl-0a-p78" secondAttribute="trailing" id="oGK-0f-wj1"/>
                             <constraint firstItem="ndl-0a-p78" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="tJH-jH-cau"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -35,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tacospots-splash-bg" width="3215" height="4287"/>
+        <image name="tacospots-logo-splash-bg" width="2052" height="2736"/>
     </resources>
 </document>

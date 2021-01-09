@@ -21,8 +21,8 @@ class CustomButton: UIButton {
         let layer1 = CALayer()
         layer1.frame = layer.bounds
         layer1.cornerRadius = layer1.frame.height / 2
-        layer1.backgroundColor = backgroundColor?.cgColor
-        layer.insertSublayer(layer1, at: 1)
+//        layer1.backgroundColor = backgroundColor?.cgColor
+        layer.insertSublayer(layer1, at: 0)
         layer1.applySketchShadow(color:  UIColor.black, alpha: 0.1, x: 10, y: 10, blur: 16, spread: 0)
         
         // light
@@ -30,7 +30,7 @@ class CustomButton: UIButton {
         let layer2 = CALayer()
         layer2.frame = layer.bounds
         layer2.cornerRadius = layer2.frame.height / 2
-        layer2.backgroundColor = backgroundColor?.cgColor
+//        layer2.backgroundColor = backgroundColor?.cgColor
         layer.insertSublayer(layer2, at: 0)
         layer2.applySketchShadow(color: UIColor.white, alpha: 0.1, x: -5, y: -5, blur: 16, spread: 0)
 

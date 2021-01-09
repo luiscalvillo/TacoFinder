@@ -21,7 +21,7 @@ class CustomUIView: UIView {
              let layer1 = CALayer()
              layer1.frame = layer.bounds
              layer1.cornerRadius = 20
-             layer1.backgroundColor = backgroundColor?.cgColor
+//             layer1.backgroundColor = backgroundColor?.cgColor
              layer.insertSublayer(layer1, at: 0)
         
         // grey cells
@@ -41,7 +41,7 @@ class CustomUIView: UIView {
              let layer2 = CALayer()
              layer2.frame = layer.bounds
              layer2.cornerRadius = 20
-             layer2.backgroundColor = backgroundColor?.cgColor
+//             layer2.backgroundColor = backgroundColor?.cgColor
              layer.insertSublayer(layer2, at: 0)
             // grey cells
 //             layer2.applySketchShadow(color: UIColor.white, alpha: 0.1, x: -5, y: -5, blur: 16, spread: 0)
@@ -51,7 +51,7 @@ class CustomUIView: UIView {
 //        layer2.applySketchShadow(color: UIColor.white, alpha: 0.7, x: -9, y: -9, blur: 16, spread: 0)
         
         // black light
-                layer2.applySketchShadow(color: UIColor.white, alpha: 0.1, x: -1, y: -1, blur: 8, spread: 0)
+            layer2.applySketchShadow(color: UIColor.white, alpha: 0.1, x: -1, y: -1, blur: 8, spread: 0)
 
         
         

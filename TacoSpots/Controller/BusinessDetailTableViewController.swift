@@ -151,7 +151,7 @@ extension BusinessDetailTableViewController: MKMapViewDelegate {
         
         annotationView.canShowCallout = false
         annotationView.annotation = annotation
-        annotationView.image = UIImage(named: "placemarkPlaceholder")
+        annotationView.image = UIImage(named: "tacoPlacemarker")
         annotationView.frame.size = CGSize(width: 40, height: 40)
         
         return annotationView

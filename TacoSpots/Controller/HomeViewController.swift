@@ -24,11 +24,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var businessDistanceLabel: UILabel!
     
     @IBOutlet weak var businessPopupView: UIView!
-    
     @IBOutlet weak var popupViewBottomConstraint: NSLayoutConstraint!
     
     var isPopupViewVisible = false
-    
     
     var latitude = 0.0
     var longitude = 0.0
@@ -41,7 +39,6 @@ class HomeViewController: UIViewController {
     
     var customPointAnnotation: CustomPointAnnotation!
     var selectedAnnotation: CustomPointAnnotation?
-    
 
     var mapViewIsVisible = true
     var listViewIsVisible = false
@@ -64,7 +61,7 @@ class HomeViewController: UIViewController {
         locationManager?.startUpdatingLocation()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleScreenTap(sender:)))
-        self.view.addGestureRecognizer(tap)
+        self.mapView.addGestureRecognizer(tap)
         
         let popupViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePopupViewScreenTap(sender:)))
         businessPopupView.addGestureRecognizer(popupViewTapGesture)
@@ -179,7 +176,7 @@ class HomeViewController: UIViewController {
         isPopupViewVisible = true
         
         UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 2.0, options: .curveEaseIn, animations: {
-            self.popupViewBottomConstraint.constant = 0
+            self.popupViewBottomConstraint.constant = 32
         }, completion: nil)
     }
     
@@ -243,10 +240,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         businessDetailVC.longitude = business.longitude!
         businessDetailVC.imageUrl = business.imageURL!
         
+        print("tapped on cell")
+        
         self.navigationController?.pushViewController(businessDetailVC, animated: true)
     }
-    
-    
 }
 
 
@@ -265,7 +262,7 @@ extension HomeViewController: MKMapViewDelegate {
         
         annotationView.annotation = annotation
         
-        annotationView.image = UIImage(named: "placemarkPlaceholder")
+        annotationView.image = UIImage(named: "tacoPlacemarker")
         annotationView.frame.size = CGSize(width: 40, height: 40)
         
         return annotationView
@@ -326,16 +323,18 @@ extension HomeViewController: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             mapView.showsUserLocation = true
             mapView.userTrackingMode = .follow
+            mapView.isZoomEnabled = true
             
             DispatchQueue.main.async {
                 
-                self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 20, sortBy: "distance", locale: "en_US") { (response, error) in
+                self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 30, sortBy: "distance", locale: "en_US") { (response, error) in
 
                     if let response = response {
                         self.businesses = response
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                             self.addBusinessesToMap()
+                            self.locationManager?.stopUpdatingLocation()
                         }
                     }
                 }
