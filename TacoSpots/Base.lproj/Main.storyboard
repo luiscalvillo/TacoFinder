@@ -67,7 +67,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFM-RD-Fh1">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KFM-RD-Fh1">
                                                         <rect key="frame" x="0.0" y="35.5" width="211" height="29"/>
                                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -76,7 +76,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knc-Z7-Nfw">
                                                         <rect key="frame" x="0.0" y="71.5" width="211" height="28.5"/>
                                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="16"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -124,13 +124,11 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="D5x-VT-Vhr">
                                                                             <rect key="frame" x="0.0" y="0.0" width="227" height="28"/>
                                                                             <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="24"/>
-                                                                            <color key="textColor" systemColor="darkTextColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TVv-cO-XqV">
                                                                             <rect key="frame" x="0.0" y="44" width="227" height="23"/>
                                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                                                            <color key="textColor" systemColor="darkTextColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAN-9v-7tI">
@@ -172,6 +170,43 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuv-1O-6AT" customClass="CustomUIView" customModule="TacoSpots" customModuleProvider="target">
+                                <rect key="frame" x="16" y="211.5" width="343" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEA-Hl-cPO" customClass="CustomButton" customModule="TacoSpots" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="144" width="311" height="40"/>
+                                        <color key="backgroundColor" red="0.63921568630000003" green="0.61568627450000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3mD-lM-7rT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <state key="normal" title="Go to Settings">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToSettingsButtonWasPressed:" destination="A7S-9q-fqw" eventType="touchUpInside" id="bBX-j9-JCQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="teL-7O-UIK">
+                                        <rect key="frame" x="16" y="16" width="311" height="112"/>
+                                        <string key="text">Oh uh... it looks like you haven't given us permission to find tacos spots for you. Please go to your Settings &gt; Location and change it to "While Using the App". Then restart TacoSpots.</string>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="teL-7O-UIK" secondAttribute="trailing" constant="16" id="2z4-pU-W8A"/>
+                                    <constraint firstItem="teL-7O-UIK" firstAttribute="leading" secondItem="cuv-1O-6AT" secondAttribute="leading" constant="16" id="9mr-DQ-c05"/>
+                                    <constraint firstAttribute="height" constant="200" id="S1g-TI-SJ4"/>
+                                    <constraint firstItem="QEA-Hl-cPO" firstAttribute="top" secondItem="teL-7O-UIK" secondAttribute="bottom" constant="16" id="Zp4-iK-aXX"/>
+                                    <constraint firstItem="teL-7O-UIK" firstAttribute="top" secondItem="cuv-1O-6AT" secondAttribute="top" constant="16" id="at2-A6-p4d"/>
+                                    <constraint firstAttribute="bottom" secondItem="QEA-Hl-cPO" secondAttribute="bottom" constant="16" id="kqU-uA-RFD"/>
+                                    <constraint firstItem="QEA-Hl-cPO" firstAttribute="leading" secondItem="cuv-1O-6AT" secondAttribute="leading" constant="16" id="nD3-e0-yso"/>
+                                    <constraint firstAttribute="trailing" secondItem="QEA-Hl-cPO" secondAttribute="trailing" constant="16" id="xGV-yC-xfC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nTo-PH-WGv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -179,10 +214,12 @@
                             <constraint firstItem="m4f-Bq-xft" firstAttribute="leading" secondItem="nTo-PH-WGv" secondAttribute="leading" constant="16" id="31S-6d-pld"/>
                             <constraint firstAttribute="bottom" secondItem="AKg-lk-5nP" secondAttribute="bottom" id="5xV-Wr-0mm"/>
                             <constraint firstItem="nTo-PH-WGv" firstAttribute="bottom" secondItem="m4f-Bq-xft" secondAttribute="bottom" constant="32" id="62C-UW-p5L"/>
+                            <constraint firstItem="nTo-PH-WGv" firstAttribute="trailing" secondItem="cuv-1O-6AT" secondAttribute="trailing" constant="16" id="AIl-98-AbL"/>
                             <constraint firstItem="AKg-lk-5nP" firstAttribute="trailing" secondItem="nTo-PH-WGv" secondAttribute="trailing" id="JQB-7w-TMC"/>
                             <constraint firstItem="nTo-PH-WGv" firstAttribute="trailing" secondItem="m4f-Bq-xft" secondAttribute="trailing" constant="16" id="KvD-wY-RhM"/>
                             <constraint firstItem="AKg-lk-5nP" firstAttribute="top" secondItem="9zJ-iY-YKV" secondAttribute="bottom" id="P0T-rQ-JVG"/>
                             <constraint firstItem="AKg-lk-5nP" firstAttribute="leading" secondItem="nTo-PH-WGv" secondAttribute="leading" id="RM2-XX-E4D"/>
+                            <constraint firstItem="cuv-1O-6AT" firstAttribute="centerY" secondItem="Teq-Qt-GTN" secondAttribute="centerY" id="Rdx-9v-FAc"/>
                             <constraint firstItem="tPr-lQ-izt" firstAttribute="leading" secondItem="nTo-PH-WGv" secondAttribute="leading" id="Sq1-Aq-ntj"/>
                             <constraint firstItem="nTo-PH-WGv" firstAttribute="trailing" secondItem="tPr-lQ-izt" secondAttribute="trailing" id="TMl-3t-KJx"/>
                             <constraint firstAttribute="bottom" secondItem="tPr-lQ-izt" secondAttribute="bottom" id="e2C-km-g59"/>
@@ -190,6 +227,7 @@
                             <constraint firstItem="nTo-PH-WGv" firstAttribute="trailing" secondItem="9zJ-iY-YKV" secondAttribute="trailing" id="izE-k6-FMb"/>
                             <constraint firstItem="9zJ-iY-YKV" firstAttribute="top" secondItem="nTo-PH-WGv" secondAttribute="top" id="kIk-nt-6W9"/>
                             <constraint firstItem="9zJ-iY-YKV" firstAttribute="leading" secondItem="nTo-PH-WGv" secondAttribute="leading" id="mO8-ru-BA5"/>
+                            <constraint firstItem="cuv-1O-6AT" firstAttribute="leading" secondItem="nTo-PH-WGv" secondAttribute="leading" constant="16" id="pLB-ex-X6F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TacoSpots" id="fnO-AQ-BSg"/>
@@ -200,6 +238,7 @@
                         <outlet property="businessNameLabel" destination="UKJ-yA-PD4" id="wsO-Y9-HUt"/>
                         <outlet property="businessPopupView" destination="m4f-Bq-xft" id="9ls-oe-gAG"/>
                         <outlet property="mapView" destination="AKg-lk-5nP" id="0nB-sK-od9"/>
+                        <outlet property="permissionsPopupView" destination="cuv-1O-6AT" id="6dw-IV-ZfD"/>
                         <outlet property="popupViewBottomConstraint" destination="62C-UW-p5L" id="KFn-T7-bRt"/>
                         <outlet property="segmentedControl" destination="hKo-Df-Yji" id="fkc-f4-9wY"/>
                         <outlet property="tableView" destination="tPr-lQ-izt" id="Mzb-Yu-F49"/>
@@ -254,19 +293,17 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEg-Xu-NDp">
                                                             <rect key="frame" x="0.0" y="0.0" width="147.5" height="28"/>
                                                             <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="24"/>
-                                                            <color key="textColor" systemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7T-pu-Dfs">
                                                             <rect key="frame" x="0.0" y="36" width="114" height="23"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                                            <color key="textColor" systemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXN-1d-SPe">
                                                             <rect key="frame" x="0.0" y="67" width="95" height="18.5"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="16"/>
-                                                            <color key="textColor" systemColor="darkTextColor"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -359,7 +396,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HbN-8G-rfF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="4Rg-sG-aea">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="4Rg-sG-aea">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.63921568630000003" green="0.61568627450000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -376,9 +413,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -26,6 +26,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var businessPopupView: UIView!
     @IBOutlet weak var popupViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var permissionsPopupView: CustomUIView!
+   
+    
     var isPopupViewVisible = false
     
     var latitude = 0.0
@@ -42,6 +45,7 @@ class HomeViewController: UIViewController {
 
     var mapViewIsVisible = true
     var listViewIsVisible = false
+    var permissionsViewIsVisible = false
     
     
     // MARK - View Lifecycle
@@ -67,6 +71,10 @@ class HomeViewController: UIViewController {
         businessPopupView.addGestureRecognizer(popupViewTapGesture)
         
         setupNavigationBar()
+        
+        permissionsPopupView.isHidden = true
+        
+        self.segmentedControl.setEnabled(false, forSegmentAt: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +93,8 @@ class HomeViewController: UIViewController {
         setupSegmentedControlView()
         setupBusinessPopupView()
     }
+    
+  
     
     @objc func handleScreenTap(sender: UITapGestureRecognizer) {
         hidePopupView()
@@ -124,6 +134,11 @@ class HomeViewController: UIViewController {
     }
     
     
+    func showPermissionsView() {
+        permissionsPopupView.isHidden = false
+        permissionsViewIsVisible = true
+    }
+    
  // MARK: - IBActions
     
     @IBAction func segmentedControlIndexValueWasChanged(_ sender: Any) {
@@ -151,6 +166,21 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func goToSettingsButtonWasPressed(_ sender: Any) {
+        goToDeviceSettings()
+    }
+    
+  
+    func goToDeviceSettings() {
+      if let url = URL(string: UIApplication.openSettingsURLString) {
+          
+          if UIApplication.shared.canOpenURL(url) {
+              UIApplication.shared.open(url, options: [:], completionHandler: nil)
+          }
+      }
+    }
+  
     func addBusinessesToMap() {
         
         for business in businessList {
@@ -325,21 +355,27 @@ extension HomeViewController: CLLocationManagerDelegate {
             mapView.userTrackingMode = .follow
             mapView.isZoomEnabled = true
             
+            
+            
             DispatchQueue.main.async {
                 
                 self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 30, sortBy: "distance", locale: "en_US") { (response, error) in
 
                     if let response = response {
                         self.businesses = response
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [self] in
                             self.tableView.reloadData()
                             self.addBusinessesToMap()
                             self.locationManager?.stopUpdatingLocation()
+                            
+                            self.segmentedControl.setEnabled(true, forSegmentAt: 1)
                         }
                     }
                 }
             }
             
+        } else {
+            showPermissionsView()
         }
     }
     

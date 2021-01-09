@@ -404,6 +404,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E43E009A2E84A591425B45C7 /* Pods-TacoSpots.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;
 				INFOPLIST_FILE = TacoSpots/Info.plist;
@@ -422,6 +423,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D23167B2537FF3FD79513981 /* Pods-TacoSpots.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CKCH7MGXV3;
 				INFOPLIST_FILE = TacoSpots/Info.plist;
