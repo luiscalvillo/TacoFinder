@@ -24,6 +24,7 @@ class BusinessDetailTableViewController: UITableViewController {
     var latitude = 0.0
     var longitude = 0.0
     var imageUrl = ""
+    var isClosed = false
     
     var currentLocation = [0.0, 0.0]
     

@@ -72,7 +72,7 @@ class HomeViewController: UIViewController {
         
         setupNavigationBar()
         
-        permissionsPopupView.isHidden = true
+        hidePermissionsView()
         
         self.segmentedControl.setEnabled(false, forSegmentAt: 1)
     }
@@ -139,6 +139,11 @@ class HomeViewController: UIViewController {
         permissionsViewIsVisible = true
     }
     
+    func hidePermissionsView() {
+        permissionsPopupView.isHidden = true
+        permissionsViewIsVisible = false
+    }
+    
  // MARK: - IBActions
     
     @IBAction func segmentedControlIndexValueWasChanged(_ sender: Any) {
@@ -192,6 +197,8 @@ class HomeViewController: UIViewController {
             customPointAnnotation.latitude = business.latitude
             customPointAnnotation.longitude = business.longitude
             customPointAnnotation.distance = business.distance
+            customPointAnnotation.isClosed = business.isClosed
+            customPointAnnotation.hours = business.hours
         
             if let lat = business.coordinates!["latitude"], let lon = business.coordinates!["longitude"] {
                 customPointAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -270,6 +277,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         businessDetailVC.longitude = business.longitude!
         businessDetailVC.imageUrl = business.imageURL!
         
+        
         print("tapped on cell")
         
         self.navigationController?.pushViewController(businessDetailVC, animated: true)
@@ -340,6 +348,7 @@ extension HomeViewController: MKMapViewDelegate {
         businessVC.latitude = selectedAnnotation!.latitude
         businessVC.longitude = selectedAnnotation!.longitude
         businessVC.distance = selectedAnnotation!.distance
+        businessVC.isClosed = selectedAnnotation!.isClosed
         
         self.navigationController?.pushViewController(businessVC, animated: true)
     }
@@ -355,8 +364,10 @@ extension HomeViewController: CLLocationManagerDelegate {
             mapView.userTrackingMode = .follow
             mapView.isZoomEnabled = true
             
-            
-            
+            if permissionsViewIsVisible == true {
+                hidePermissionsView()
+            }
+         
             DispatchQueue.main.async {
                 
                 self.retrieveBusinesses(latitude: self.latitude, longitude: self.longitude, category: "tacos", limit: 30, sortBy: "distance", locale: "en_US") { (response, error) in
@@ -402,6 +413,8 @@ class CustomPointAnnotation: MKPointAnnotation {
     var latitude: Double!
     var longitude: Double!
     var distance: Double!
+    var isClosed: Bool!
+    var hours: [String : Any]!
 }
 
 extension Double {
