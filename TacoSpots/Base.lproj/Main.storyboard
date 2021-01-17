@@ -173,38 +173,56 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuv-1O-6AT" customClass="CustomUIView" customModule="TacoSpots" customModuleProvider="target">
                                 <rect key="frame" x="16" y="211.5" width="343" height="200"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEA-Hl-cPO" customClass="CustomButton" customModule="TacoSpots" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="144" width="311" height="40"/>
-                                        <color key="backgroundColor" red="0.63921568630000003" green="0.61568627450000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="3mD-lM-7rT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                        <state key="normal" title="Go to Settings">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goToSettingsButtonWasPressed:" destination="A7S-9q-fqw" eventType="touchUpInside" id="bBX-j9-JCQ"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="teL-7O-UIK">
-                                        <rect key="frame" x="16" y="16" width="311" height="112"/>
-                                        <string key="text">Oh uh... it looks like you haven't given us permission to find tacos spots for you. Please go to your Settings &gt; Location and change it to "While Using the App". Then restart TacoSpots.</string>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YBq-Ii-i5O">
+                                        <rect key="frame" x="16" y="16" width="311" height="168"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="teL-7O-UIK">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="102"/>
+                                                <string key="text">Oh uh... it looks like you haven't given us permission to find tacos spots for you. Please go to your Settings &gt; Location and change it to "While Using the App". Then restart TacoSpots.</string>
+                                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="EcW-Ib-4hn">
+                                                <rect key="frame" x="0.0" y="118" width="311" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG1-US-yUk" customClass="CustomButton" customModule="TacoSpots" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="50"/>
+                                                        <color key="backgroundColor" red="0.63921568630000003" green="0.61568627450000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                        <state key="normal" title="Go Back">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="goBackButtonWasPressed:" destination="A7S-9q-fqw" eventType="touchUpInside" id="z5E-EM-T0A"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEA-Hl-cPO" customClass="CustomButton" customModule="TacoSpots" customModuleProvider="target">
+                                                        <rect key="frame" x="163.5" y="0.0" width="147.5" height="50"/>
+                                                        <color key="backgroundColor" red="0.63921568630000003" green="0.61568627450000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="3mD-lM-7rT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                        <state key="normal" title="Go to Settings">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="goToSettingsButtonWasPressed:" destination="A7S-9q-fqw" eventType="touchUpInside" id="bBX-j9-JCQ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="teL-7O-UIK" secondAttribute="trailing" constant="16" id="2z4-pU-W8A"/>
-                                    <constraint firstItem="teL-7O-UIK" firstAttribute="leading" secondItem="cuv-1O-6AT" secondAttribute="leading" constant="16" id="9mr-DQ-c05"/>
                                     <constraint firstAttribute="height" constant="200" id="S1g-TI-SJ4"/>
-                                    <constraint firstItem="QEA-Hl-cPO" firstAttribute="top" secondItem="teL-7O-UIK" secondAttribute="bottom" constant="16" id="Zp4-iK-aXX"/>
-                                    <constraint firstItem="teL-7O-UIK" firstAttribute="top" secondItem="cuv-1O-6AT" secondAttribute="top" constant="16" id="at2-A6-p4d"/>
-                                    <constraint firstAttribute="bottom" secondItem="QEA-Hl-cPO" secondAttribute="bottom" constant="16" id="kqU-uA-RFD"/>
-                                    <constraint firstItem="QEA-Hl-cPO" firstAttribute="leading" secondItem="cuv-1O-6AT" secondAttribute="leading" constant="16" id="nD3-e0-yso"/>
-                                    <constraint firstAttribute="trailing" secondItem="QEA-Hl-cPO" secondAttribute="trailing" constant="16" id="xGV-yC-xfC"/>
+                                    <constraint firstItem="YBq-Ii-i5O" firstAttribute="top" secondItem="cuv-1O-6AT" secondAttribute="top" constant="16" id="VeC-dW-hFf"/>
+                                    <constraint firstAttribute="trailing" secondItem="YBq-Ii-i5O" secondAttribute="trailing" constant="16" id="WEd-sP-L7d"/>
+                                    <constraint firstAttribute="bottom" secondItem="YBq-Ii-i5O" secondAttribute="bottom" constant="16" id="gTo-yP-6VD"/>
+                                    <constraint firstItem="YBq-Ii-i5O" firstAttribute="leading" secondItem="cuv-1O-6AT" secondAttribute="leading" constant="16" id="nvZ-B1-o0A"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -246,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTR-o2-g7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737.68115942029" y="220.98214285714286"/>
+            <point key="canvasLocation" x="1736.8" y="220.83958020989508"/>
         </scene>
         <!--Business Detail Table View Controller-->
         <scene sceneID="W0J-VP-r3D">

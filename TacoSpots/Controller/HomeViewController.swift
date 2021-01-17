@@ -171,6 +171,10 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func goBackButtonWasPressed(_ sender: Any) {
+        hidePermissionsView()
+    }
+    
     
     @IBAction func goToSettingsButtonWasPressed(_ sender: Any) {
         goToDeviceSettings()
